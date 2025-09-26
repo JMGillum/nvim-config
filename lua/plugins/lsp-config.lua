@@ -24,27 +24,21 @@ return {
   {
     "neovim/nvim-lspconfig",
     config = function()
-      local lspconfig = require("lspconfig")
-
-      lspconfig.lua_ls.setup({})
-      lspconfig.pyright.setup({
-	settings = {
-	    pyright = {
-	      -- Using Ruff's import organizer
-	      disableOrganizeImports = true,
-	    },
-	    python = {
-	      analysis = {
-		-- Ignore all files for analysis to exclusively use Ruff for linting
-		ignore = { '*' },
+      vim.lsp.config('*',{}) -- Default config for all lsps
+      vim.lsp.config('pyright', {
+		settings = {
+	      pyright = {
+	        -- Using Ruff's import organizer
+	        disableOrganizeImports = true,
+	      },
+	      python = {
+	        analysis = {
+		      -- Ignore all files for analysis to exclusively use Ruff for linting
+		      ignore = { '*' },
+	        },
 	      },
 	    },
-	  },
       })
-      lspconfig.ruff.setup({})
-      lspconfig.ts_ls.setup({})
-      lspconfig.rust_analyzer.setup({})
-      lspconfig.clangd.setup({})
     end
   },
 }
